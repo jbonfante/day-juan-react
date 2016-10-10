@@ -1,19 +1,33 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Match } from 'react-router';
+import LayoutNav from './layout/Nav';
+import LayoutFooter from './layout/Footer';
+import Home from './Home'
+import Documentation from './Documentation'
+import './App.scss';
+
+const title = 'Day Juan React';
+const gh = 'jbonfante/day-juan-react';
+
+// if using a root url, remove the basename value here and in BrowserRouter
+const basename = process.env.REACT_APP_GH_PAGES_PATH ?
+    `/${process.env.REACT_APP_GH_PAGES_PATH}` : '';
+
+// {/*<BrowserRouter basename={basename}>*/};
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+        <BrowserRouter>
+            <div className="App">
+              <LayoutNav title={title} gh={gh}/>
+                {/* Begin Routes */}
+                <Match exactly pattern="/" render={() => <Home title={title} gh={gh} />} />
+                <Match pattern="/documentation" component={Documentation} />
+                {/* End Routes */}
+                <LayoutFooter gh={gh} />
+            </div>
+        </BrowserRouter>
     );
   }
 }
