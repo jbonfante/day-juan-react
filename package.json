@@ -2,6 +2,9 @@
   "name": "day-juan-react",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "7.0.0"
+  },
   "devDependencies": {
     "autoprefixer": "6.4.1",
     "babel-core": "6.14.0",
