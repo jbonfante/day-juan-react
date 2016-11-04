@@ -9,6 +9,10 @@ var WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeMod
 var getClientEnvironment = require('./env');
 var paths = require('./paths');
 
+const bootstrapEntryPoints = require('./webpack.bootstrap.config.js');
+// eslint-disable-next-line no-console
+console.log(`=> bootstrap-loader configuration: ${bootstrapEntryPoints.dev}`);
+
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
 var publicPath = '/';
@@ -45,6 +49,7 @@ module.exports = {
     require.resolve('react-dev-utils/webpackHotDevClient'),
     // We ship a few polyfills by default:
     require.resolve('./polyfills'),
+    bootstrapEntryPoints.dev,
     // Finally, this is your app's code:
     paths.appIndexJs
     // We include the app code last so that if there is a runtime error during
@@ -143,7 +148,9 @@ module.exports = {
           limit: 10000,
           name: 'static/media/[name].[hash:8].[ext]'
         }
-      }
+      },
+      // Bootstrap 4
+      { test: /bootstrap\/dist\/js\/umd\//, loader: 'imports?jQuery=jquery' },
     ]
   },
   
@@ -185,7 +192,26 @@ module.exports = {
     // to restart the development server for Webpack to discover it. This plugin
     // makes the discovery automatic so you don't have to restart.
     // See https://github.com/facebookincubator/create-react-app/issues/186
-    new WatchMissingNodeModulesPlugin(paths.appNodeModules)
+    new WatchMissingNodeModulesPlugin(paths.appNodeModules),
+    // jQuery
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery",
+      "window.jQuery": "jquery",
+      Tether: "tether",
+      "window.Tether": "tether",
+      Alert: "exports?Alert!bootstrap/js/dist/alert",
+      Button: "exports?Button!bootstrap/js/dist/button",
+      Carousel: "exports?Carousel!bootstrap/js/dist/carousel",
+      Collapse: "exports?Collapse!bootstrap/js/dist/collapse",
+      Dropdown: "exports?Dropdown!bootstrap/js/dist/dropdown",
+      Modal: "exports?Modal!bootstrap/js/dist/modal",
+      Popover: "exports?Popover!bootstrap/js/dist/popover",
+      Scrollspy: "exports?Scrollspy!bootstrap/js/dist/scrollspy",
+      Tab: "exports?Tab!bootstrap/js/dist/tab",
+      Tooltip: "exports?Tooltip!bootstrap/js/dist/tooltip",
+      Util: "exports?Util!bootstrap/js/dist/util",
+    })
   ],
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.

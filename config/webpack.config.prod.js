@@ -7,6 +7,10 @@ var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 var url = require('url');
 var paths = require('./paths');
 var getClientEnvironment = require('./env');
+const bootstrapEntryPoints = require('./webpack.bootstrap.config.js');
+
+// eslint-disable-next-line no-console
+console.log(`=> bootstrap-loader configuration: ${bootstrapEntryPoints.prod}`);
 
 function ensureSlash(path, needsSlash) {
   var hasSlash = path.endsWith('/');
@@ -54,6 +58,8 @@ module.exports = {
   // In production, we only want to load the polyfills and the app code.
   entry: [
     require.resolve('./polyfills'),
+    bootstrapEntryPoints.prod,
+    'tether',
     paths.appIndexJs
   ],
   output: {
@@ -153,7 +159,9 @@ module.exports = {
           limit: 10000,
           name: 'static/media/[name].[hash:8].[ext]'
         }
-      }
+      },
+      // Bootstrap 4
+      { test: /bootstrap\/dist\/js\/umd\//, loader: 'imports?jQuery=jquery' },
     ]
   },
   
@@ -177,6 +185,9 @@ module.exports = {
     // in `package.json`, in which case it will be the pathname of that URL.
     new InterpolateHtmlPlugin({
       PUBLIC_URL: publicUrl
+    }),
+    new webpack.ProvidePlugin({
+      'window.Tether': 'tether',
     }),
     // Generates an `index.html` file with the <script> injected.
     new HtmlWebpackPlugin({

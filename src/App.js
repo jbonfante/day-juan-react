@@ -4,6 +4,8 @@ import LayoutNav from './layout/Nav';
 import LayoutFooter from './layout/Footer';
 import Home from './Home'
 import Documentation from './Documentation'
+import FoodApi from './FoodApi'
+import ReactKonva from './ReactKonva';
 import './App.scss';
 
 const title = 'Day Juan React';
@@ -24,6 +26,8 @@ class App extends Component {
                 {/* Begin Routes */}
                 <Match exactly pattern="/" render={() => <Home title={title} gh={gh} />} />
                 <Match pattern="/documentation" component={Documentation} />
+                <Match pattern="/food" component={FoodApi} />
+                <Match pattern="/konva" component={ReactKonva} />
                 {/* End Routes */}
                 <LayoutFooter gh={gh} />
             </div>

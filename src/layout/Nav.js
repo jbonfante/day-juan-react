@@ -12,6 +12,12 @@ const LayoutNav = ({title, gh}) => {
                         <NavLink tag={Link} className="nav-link" to="/documentation" activeClassName="active">Documentation</NavLink>
                     </NavItem>
                     <NavItem>
+                        <NavLink tag={Link} className="nav-link" to="/food" activeClassName="active">Food</NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink tag={Link} className="nav-link" to="/konva" activeClassName="active">Konva</NavLink>
+                    </NavItem>
+                    <NavItem>
                         <NavLink href={`https://github.com/${gh}`}>Github</NavLink>
                     </NavItem>
                 </Nav>
