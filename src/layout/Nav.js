@@ -4,7 +4,7 @@ import { Container, Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstra
 
 const LayoutNav = ({title, gh}) => {
     return (
-        <Navbar className="header" color="faded" light>
+        <Navbar className="header bg-inverse" color="inverse" dark>
             <Container fluid>
                 <NavbarBrand tag={Link} to="/">{title}</NavbarBrand>
                 <Nav className="nav navbar-nav pull-xs-right">

@@ -29,7 +29,7 @@ class MyRect extends React.Component {
     }
 }
 
-function MyShape() {
+const MyShape = () => {
     return (
         <Shape fill="#00D2FF" draggable
                sceneFunc={function (ctx) {
@@ -81,7 +81,7 @@ const ReactKonva = ({}) => {
             <Layer>
                 <MyRect/>
                 <MyCircle/>
-                <MyShape/>t
+                <MyShape/>
             </Layer>
         </Stage>
     );

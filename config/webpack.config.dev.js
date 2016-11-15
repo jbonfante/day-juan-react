@@ -6,6 +6,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 var WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var getClientEnvironment = require('./env');
 var paths = require('./paths');
 
@@ -119,10 +120,21 @@ module.exports = {
       // "style" loader turns CSS into JS modules that inject <style> tags.
       // In production, we use a plugin to extract that CSS to a file, but
       // in development "style" loader enables hot editing of CSS.
+      // {
+      //   test: /\.s?css$/,
+      //   loader: 'style!css!postcss!sass!sass-resources'
+      // },
       {
         test: /\.s?css$/,
-        loader: 'style!css!postcss!sass'
+        loader: ExtractTextPlugin.extract(
+            'style',
+            'css?modules&importLoaders=2&localIdentName=[name]__[local]__[hash:base64:5]' +
+            '!postcss'+
+            '!sass' +
+            '!sass-resources'
+        ),
       },
+
       // JSON is not enabled by default in Webpack but both Node and Browserify
       // allow it implicitly so we also enable it.
       {
@@ -153,7 +165,8 @@ module.exports = {
       { test: /bootstrap\/dist\/js\/umd\//, loader: 'imports?jQuery=jquery' },
     ]
   },
-  
+  sassResources: './config/sass-resources.scss',
+
   // We use PostCSS for autoprefixing only.
   postcss: function() {
     return [
@@ -211,7 +224,8 @@ module.exports = {
       Tab: "exports?Tab!bootstrap/js/dist/tab",
       Tooltip: "exports?Tooltip!bootstrap/js/dist/tooltip",
       Util: "exports?Util!bootstrap/js/dist/util",
-    })
+    }),
+    new ExtractTextPlugin()
   ],
   // Some libraries import Node modules but don't use them in the browser.
   // Tell Webpack to provide empty mocks for them so importing them works.

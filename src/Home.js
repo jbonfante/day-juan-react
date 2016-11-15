@@ -7,6 +7,8 @@ import {
     Col,
     Row
 } from 'reactstrap';
+import './Home.scss'
+
 require ('jquery');
 
 class CanvasComponent extends React.Component {
@@ -28,37 +30,7 @@ class CanvasComponent extends React.Component {
 const Home = ({title, gh}) => {
 
     return (
-        <div id="home" className="Home">
-            <div id="carousel-example-generic" className="carousel slide" data-ride="carousel">
-                <ol className="carousel-indicators">
-                    <li data-target="#carousel-example-generic" data-slide-to="0" className="active"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                </ol>
-                <div className="carousel-inner" role="listbox">
-                    <div className="carousel-item active">
-                        {/*<img src="..." alt="First slide" />*/}
-                        <CanvasComponent/>
-                    </div>
-                    <div className="carousel-item">
-                        <img src="..." alt="Second slide" />
-                        <CanvasComponent/>
-                    </div>
-                    <div className="carousel-item">
-                        <img src="..." alt="Third slide" />
-                        <CanvasComponent/>
-                    </div>
-                </div>
-                <a className="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                    <span className="icon-prev" aria-hidden="true"></span>
-                    <span className="sr-only">Previous</span>
-                </a>
-                <a className="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                    <span className="icon-next" aria-hidden="true"></span>
-                    <span className="sr-only">Next</span>
-                </a>
-            </div>
-
+        <div id="home" className="Home bg-inverse">
 
             <Jumbotron tag="section" className="jumbotron-header text-xs-center m-y-3">
                 <Container fluid>
@@ -66,7 +38,7 @@ const Home = ({title, gh}) => {
                         <Col>
                             <h1 className="display-4">{title}</h1>
                             <p className="lead m-y-2">
-                                An example reactstrap component built, documented & published with <a href="https://github.com/reactstrap/component-template">Component Template</a>
+                                Still in the works
                             </p>
                             <p>
                                 <Button
@@ -86,6 +58,59 @@ const Home = ({title, gh}) => {
                     </Row>
                 </Container>
             </Jumbotron>
+
+            <Jumbotron className="AppSection" tag="section">
+                <div className="shape"></div>
+                <Row>
+                    <Col>
+                        <h1 className="jumbotron-header display-4">
+                            UI
+                        </h1>
+                    </Col>
+                </Row>
+
+            </Jumbotron>
+
+            <Jumbotron className="AppSection" tag="section">
+                <div className="shape"></div>
+                <Row>
+                    <Col>
+                        <h1 className="jumbotron-header display-4">
+                            BACK-END
+                        </h1>
+                    </Col>
+                </Row>
+
+            </Jumbotron>
+
+            <Jumbotron className="AppSection" tag="section">
+                <div className="shape"></div>
+                <Row>
+                    <Col>
+                        <h1 className="jumbotron-header display-4">
+                            PRESENTATIONS
+                        </h1>
+                    </Col>
+                </Row>
+
+            </Jumbotron>
+
+
+            <Jumbotron className="AppSection" tag="section">
+                <div className="shape"></div>
+                <Row>
+                    <Col>
+                        <h1 className="jumbotron-header display-4">
+                            EXAMPLES
+                        </h1>
+                    </Col>
+                </Row>
+
+            </Jumbotron>
+
+
+
+
             <Container fluid>
                 <Row>
                     <Col sm={{ size: 8, offset: 2 }}>
